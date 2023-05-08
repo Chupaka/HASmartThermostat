@@ -1,10 +1,21 @@
 clear_integral:
-  name: Clear Integral
-  description: Clears the integrating part of the PID.
+  name: Clear or Set Integral
+  description: Clears or sets the integrating part of the PID.
   target:
     entity:
       integration: smart_thermostat
       domain: climate
+  fields:
+    integral:
+      name: New Integral value
+      description: New value for Integral instead of zero
+      required: false
+      advanced: false
+      example: 12.5
+      selector:
+        number:
+          step: 0.1
+          mode: box
 set_pid_mode:
   name: Set PID mode
   description: Selects the PID regulation auto or off.
