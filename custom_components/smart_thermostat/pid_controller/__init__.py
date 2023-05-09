@@ -147,7 +147,7 @@ class PID:
         self._input_time = None
         self._last_input = None
         self._last_input_time = None
-        
+
     def calc(self, input_val, set_point, input_time=None, last_input_time=None, ext_temp=None):
         """Adjusts and holds the given setpoint.
 
@@ -212,15 +212,13 @@ class PID:
         # Compensate losses due to external temperature
         self._external = self._Ke * self._dext
 
-        # In order to prevent windup, only integrate if the process is not saturated and set point
-        # is stable
-        if self._out_min < self._last_output < self._out_max and \
-                self._last_set_point == self._set_point:
-            self._integral += self._Ki * self._error * self._dt
-            # Take external temperature compensation into account for integral clamping
-            self._integral = max(min(self._integral, self._out_max - self._external), self._out_min - self._external)
-        if ext_temp is not None and self._last_set_point != self._set_point:
-            self._integral = 0  # Reset integral if set point has changed as system will need to converge to a new value
+        # In order to prevent windup, only integrate if set point is stable and
+        # integration is not trying to over-saturate the output value
+        if self._last_set_point == self._set_point:
+            delta = self._Ki * self._error * self._dt
+            if (delta > 0 and self._last_output < self._out_max) or \
+                (delta < 0 and self._last_output > self._out_min):
+                self._integral += delta
 
         self._proportional = self._Kp * self._error
         if self._dt != 0:
