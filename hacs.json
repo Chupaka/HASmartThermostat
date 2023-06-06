@@ -1,5 +1,4 @@
 {
   "name": "Smart thermostat (PID) Flexy",
-  "render_readme": true,
-  "homeassistant": "0.104.2"
+  "render_readme": true
 }
