@@ -10,7 +10,7 @@ Create a virtual thermostat with accurate and reactive temperature control throu
 Any heater or air conditioner unit with ON/OFF switch or pilot wire can be controlled using a pulse 
 width modulation that depends on the temperature error and its variation over time.
 
-![](https://github.com/ScratMan/HASmartThermostat/blob/master/climate_chart.png?raw=true)
+![](https://github.com/Chupaka/HASmartThermostat/blob/master/climate_chart.png?raw=true)
 
 ## Installation:
 I recommend using HACS for easier installation.
@@ -111,7 +111,7 @@ If it settles over the set point, decrease the Ki value.
 the system. If the sensor temperature increases quickly between two samples, the PID will decrease 
 the PWM level accordingly to limit the overshoot.
 
-![](https://upload.wikimedia.org/wikipedia/commons/4/43/PID_en.svg)
+![](https://github.com/Chupaka/HASmartThermostat/blob/master/pid.png?raw=true)
 
 PID output value is the weighted sum of the control terms:\
 `error = target_temp - current_temperature`\
